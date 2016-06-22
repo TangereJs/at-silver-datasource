@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 <head>
 
   <title>at-silver-datasource tests</title>
@@ -17,6 +18,7 @@
   <link rel="import" href="../at-silver-datasource.html">
 
 </head>
+
 <body>
 
   <test-fixture id="basic">
@@ -25,17 +27,209 @@
     </template>
   </test-fixture>
 
+  <test-fixture id="attrMethodAndUrl">
+    <template>
+      <at-silver-datasource method="GET" url="api/getdata?input1={{input1}}&amp;input2={{input2}}"></at-silver-datasource>
+    </template>
+  </test-fixture>
+
   <script>
+    suite('tests where properties are set as attributes', function() {
+      // setup the sinon.js fake server
+      var server;
+      var responseHeaders = {
+        json: {
+          'Content-Type': 'application/json'
+        }
+      };
 
-    suite('basic', function() {
+      setup(function() {
+        server = sinon.fakeServer.create();
+        server.respondWith('GET',/api\/getdata?[\w]+/g, [
+          200,
+          responseHeaders.json,
+          '{"success": true}'
+        ]);
 
-      test('basic test', function() {
-        assert.equal(true, true, "");
+        server.respondWith('POST', 'api/getdata', [
+          200,
+          responseHeaders.json,
+          '{"success": true}'
+        ]);
+      });
+
+      teardown(function() {
+        server.restore();
+      });
+
+      suite('method=get, invalid and valid urls', function() {
+
+        test('method = GET, invalid urls, eventName !== autostart', function() {
+          var datasource = fixture('basic');
+          var expectedValue = "";
+          var eventObj = {
+            eventName: "event1",
+            data: {
+              "event1": "lorem ipsum"
+            }
+          };
+
+          datasource.value = expectedValue;
+          Polymer.dom(datasource).setAttribute('method', 'GET');
+
+          var invalidUrlValues = [undefined, null, true, false, 424242, 3.14159, [], {}, ""];
+
+          invalidUrlValues.forEach(function(value, index) {
+            Polymer.dom(datasource).setAttribute('url', undefined);
+            datasource.actionListener(eventObj);
+            server.respond();
+            flush(function () {
+              assert.equal(datasource.value, expectedValue);
+            });
+          });
+        });
+
+        test('method = GET, invalid urls, eventName === autostart', function() {
+          var datasource = fixture('basic');
+          var expectedValue = "";
+          var eventObj = {
+            eventName: "autostart",
+            data: {}
+          };
+
+          datasource.value = expectedValue;
+          Polymer.dom(datasource).setAttribute('method', 'GET');
+
+          var invalidUrlValues = [undefined, null, true, false, 424242, 3.14159, [], {}, ""];
+          var self = this;
+
+          invalidUrlValues.forEach(function(value, index) {
+            Polymer.dom(datasource).setAttribute('url', undefined);
+            datasource.actionListener(eventObj);
+            server.respond();
+            flush(function () {
+              assert.equal(datasource.value, expectedValue);
+            });
+          });
+        });
+
+        test('method = GET, valid url, eventName === autostart', function(done) {
+          var datasource = fixture('basic');
+          var expectedValue = "";
+          var eventObj = {
+            eventName: "autostart",
+            data: {}
+          };
+
+          datasource.value = expectedValue;
+          Polymer.dom(datasource).setAttribute('method', 'GET');
+          Polymer.dom(datasource).setAttribute('url', 'api/getdata');
+
+          datasource.actionListener(eventObj);
+          server.respond();
+          flush(function () {
+            assert.isObject(datasource.value, 'datasource.value is not an object');
+            assert.equal(datasource.value.success, true, 'datasource.value.success is not true');
+            done();
+          });
+        });
+
+        test('method = GET, valid url with input1={{input1}}, eventName === input1', function(done) {
+          var datasource = fixture('basic');
+          var expectedValue = "";
+          var eventObj = {
+            eventName: "input1",
+            data: {
+              "input1": "input1value"
+            }
+          };
+
+          datasource.value = expectedValue;
+          Polymer.dom(datasource).setAttribute('method', 'GET');
+          Polymer.dom(datasource).setAttribute('url', 'api/getdata?input1={{input1}}');
+
+          datasource.actionListener(eventObj);
+          assert.equal(datasource.$.activity.url, 'api/getdata?input1=input1value', 'url is not constructed correctly');
+          server.respond();
+          flush(function () {
+            assert.equal(datasource.value.success, true, 'datasource.value.success is not true');
+            done();
+          });
+        });
+
+        test('method = GET, valid url with input1={{input1}}&input2={{input2}}, eventName === input1', function(done) {
+          var datasource = fixture('attrMethodAndUrl');
+          var expectedValue = "";
+          var eventObj = {
+            eventName: "input1",
+            data: {
+              "input1": "input1value"
+            }
+          };
+
+          datasource.value = expectedValue;
+          datasource.actionListener(eventObj);
+
+          assert.equal(datasource.$.activity.url, '', 'url is not constructed correctly');
+          server.respond();
+          flush(function () {
+            assert.equal(datasource.value, "", 'datasource.value is not empty');
+            done();            
+          });
+        });
+
+        test('method = GET, valid url with input1={{input1}}&input2={{input2}}, eventName === input2', function(done) {
+          var datasource = fixture('attrMethodAndUrl');
+          var expectedValue = "";
+          var eventObj = {
+            eventName: "input2",
+            data: {
+              "input2": "input2value"
+            }
+          };
+
+          datasource.value = expectedValue;
+          datasource.actionListener(eventObj);
+
+          assert.equal(datasource.$.activity.url, '', 'url is not constructed correctly');
+          server.respond();
+          flush(function () {
+            assert.equal(datasource.value, "", 'datasource.value is not empty');
+            done();
+          });
+        });
+
+        test('method = GET, valid url with input1={{input1}}&input2={{input2}}, eventName === inpu1, input2', function(done) {
+          var datasource = fixture('attrMethodAndUrl');
+          var expectedValue = "";
+          var eventObj = {
+            eventName: "input1",
+            data: {
+              "input1": "input1value",
+              "input2": "input2value"
+            }
+          };
+
+          datasource.value = expectedValue;
+
+          datasource.actionListener(eventObj);
+          eventObj.eventName = "input2";
+          datasource.actionListener(eventObj);
+
+          assert.equal(datasource.$.activity.url, 'api/getdata?input1=input1value&input2=input2value', 'url is not constructed correctly');
+          server.respond();
+          flush(function () {
+            assert.isObject(datasource.value, 'datasource.value is not object');
+            assert.equal(datasource.value.success, true, 'datasource.value.sucess is not true');
+            done();
+          });
+        });
+
       });
 
     });
-
   </script>
 
 </body>
+
 </html>

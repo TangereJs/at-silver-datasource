@@ -4,8 +4,11 @@
 <dom-module id="at-silver-datasource">
   <template>
     <style>
+      :host {
+        display: none;
+      }
     </style>
-    <at-core-activity id="activity" method="{{method}}"></at-core-activity>
+    <at-core-activity id="activity" method="{{method}}" on-request="_activity_onRequest" on-response="_activity_onResponse" on-error="_activity_onError"></at-core-activity>
   </template>
   <script>
     'use strict';
@@ -15,7 +18,7 @@
         url: {
           type: String,
           value: "",
-          observer: "urlChanged"
+          observer: "_urlChanged"
         },
         method: {
           type: String,
@@ -29,8 +32,78 @@
       ready: function () {
 
       },
-      listen: function (event) {
+      _urlChanged: function (newValue, oldValue) {
 
+      },
+      actionListener: function (event) {
+        function isString(obj) {
+          return Object.prototype.toString.call(obj) === "[object String]";
+        }
+        function isNonEmptyString(obj) {
+          return isString(obj) && obj !== "";
+        }
+        function isObject(obj) {
+          return Object.prototype.toString.call(obj) === "[object Object]";
+        }
+
+        var url = this.url;
+        if (!isNonEmptyString(url)) {
+          return;
+        }
+
+        if (!isNonEmptyString(event.eventName) || !isObject(event.data)) {
+          return;
+        }
+
+        var curlyBraceRegex = /\{\{|\}\}/gm;
+
+        if (!curlyBraceRegex.test(url) && event.eventName === "autostart") {
+          // we have a static url and autostart
+          this.$.activity.url = url;
+          this.$.activity.generateRequest();
+          return;
+        }
+
+        // here eventName is !== 'autostart'; we have a legit eventName
+        var matchedParts = url.match(/\{\{([\w]+)\}\}/gm);
+        if (!matchedParts) {
+          // so if no matches are found match function returns
+          // this will also catch invalid static urls like "undefined", "null", "[]", "{}", etc ...
+          return ;
+        }
+
+        var cachedEvents = this._cachedEvents;
+        if (!this._cachedEvents) {
+          cachedEvents = this._cachedEvents = {};
+        }
+        var eventName = event.eventName;
+        if (!cachedEvents.hasOwnProperty(eventName)) {
+          cachedEvents[eventName] = event.data[eventName];
+        }
+
+        matchedParts.forEach(function (part, index) {
+          var propertyName = part.replace(curlyBraceRegex, "");
+          if (cachedEvents.hasOwnProperty(propertyName)) {
+            url = url.replace(part, cachedEvents[propertyName]);
+          }
+        });
+
+        if (!curlyBraceRegex.test(url)) {
+          // all fields are replaced
+          this.$.activity.url = url;
+          this.$.activity.generateRequest();
+        }
+      },
+      _activity_onRequest: function (event) {
+        console.log('acitivty on request');
+      },
+      _activity_onResponse: function (event) {
+        console.log('acitivty on response');
+        this.value = event.detail;
+        this.fire('value-changed', { value: this.value });
+      },
+      _activity_onError: function (event) {
+        console.log('acitivty on error');
       }
     });
   </script>
