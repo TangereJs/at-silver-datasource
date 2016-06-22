@@ -1,0 +1,37 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../at-core-activity/at-core-activity.html">
+
+<dom-module id="at-silver-datasource">
+  <template>
+    <style>
+    </style>
+    <at-core-activity id="activity" method="{{method}}"></at-core-activity>
+  </template>
+  <script>
+    'use strict';
+    Polymer({
+      is: 'at-silver-datasource',
+      properties: {
+        url: {
+          type: String,
+          value: "",
+          observer: "urlChanged"
+        },
+        method: {
+          type: String,
+          value: ""
+        },
+        value: {
+          type: String,
+          value: ""
+        }
+      },
+      ready: function () {
+
+      },
+      listen: function (event) {
+
+      }
+    });
+  </script>
+</dom-module>
