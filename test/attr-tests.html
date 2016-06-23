@@ -1,0 +1,648 @@
+<!doctype html>
+<html>
+
+<head>
+
+  <title>at-silver-datasource tests</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+  <script src="../../web-component-tester/browser.js"></script>
+  <script src="../../iron-test-helpers/test-helpers.js"></script>
+  <script src="../../iron-test-helpers/mock-interactions.js"></script>
+
+  <link rel="import" href="../at-silver-datasource.html">
+
+</head>
+
+<body>
+  <!-- tests where urls are invalid values  -->
+  <test-fixture id="urlGetUndefined">
+    <template>
+      <at-silver-datasource method="GET" url="undefined"></at-silver-datasource>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="urlGetNull">
+    <template>
+      <at-silver-datasource method="GET" url="null"></at-silver-datasource>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="urlGetTrue">
+    <template>
+      <at-silver-datasource method="GET" url="true"></at-silver-datasource>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="urlGetFalse">
+    <template>
+      <at-silver-datasource method="GET" url="false"></at-silver-datasource>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="urlGet424242">
+    <template>
+      <at-silver-datasource method="GET" url="424242"></at-silver-datasource>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="urlGet3.14159">
+    <template>
+      <at-silver-datasource method="GET" url="url3.14159"></at-silver-datasource>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="urlGet[]">
+    <template>
+      <at-silver-datasource method="GET" url="[]"></at-silver-datasource>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="urlGet{}">
+    <template>
+      <at-silver-datasource method="GET" url="{}"></at-silver-datasource>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="urlGet">
+    <template>
+      <at-silver-datasource method="GET" url=""></at-silver-datasource>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="urlPostUndefined">
+    <template>
+      <at-silver-datasource method="POST" url="undefined"></at-silver-datasource>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="urlPostNull">
+    <template>
+      <at-silver-datasource method="POST" url="null"></at-silver-datasource>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="urlPostTrue">
+    <template>
+      <at-silver-datasource method="POST" url="true"></at-silver-datasource>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="urlPostFalse">
+    <template>
+      <at-silver-datasource method="POST" url="false"></at-silver-datasource>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="urlPost424242">
+    <template>
+      <at-silver-datasource method="POST" url="424242"></at-silver-datasource>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="urlPost3.14159">
+    <template>
+      <at-silver-datasource method="POST" url="url3.14159"></at-silver-datasource>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="urlPost[]">
+    <template>
+      <at-silver-datasource method="POST" url="[]"></at-silver-datasource>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="urlPost{}">
+    <template>
+      <at-silver-datasource method="POST" url="{}"></at-silver-datasource>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="urlPost">
+    <template>
+      <at-silver-datasource method="POST" url=""></at-silver-datasource>
+    </template>
+  </test-fixture>
+
+  <!-- Tests for valid static url -->
+
+  <test-fixture id="urlGetStatic">
+    <template>
+      <at-silver-datasource method="GET" url="api/getdata"></at-silver-datasource>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="urlPostStatic">
+    <template>
+      <at-silver-datasource method="POST" url="api/getdata"></at-silver-datasource>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="urlGetInput1">
+    <template>
+      <at-silver-datasource method="GET" url="api/getdata?input1={{input1}}"></at-silver-datasource>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="urlPostInput1">
+    <template>
+      <at-silver-datasource method="POST" url="api/getdata?input1={{input1}}"></at-silver-datasource>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="urlGetInput1Input2">
+    <template>
+      <at-silver-datasource method="GET" url="api/getdata?input1={{input1}}&amp;input2={{input2}}"></at-silver-datasource>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="urlPostInput1Input2">
+    <template>
+      <at-silver-datasource method="POST" url="api/getdata?input1={{input1}}&amp;input2={{input2}}"></at-silver-datasource>
+    </template>
+  </test-fixture>
+
+  <script>
+    suite('tests where properties are set as attributes', function() {
+      // setup the sinon.js fake server
+      var server;
+      var responseHeaders = {
+        json: {
+          'Content-Type': 'application/json'
+        }
+      };
+
+      setup(function() {
+        server = sinon.fakeServer.create();
+        server.respondWith('GET', /api\/getdata?[\w]+/g, [
+          200,
+          responseHeaders.json,
+          '{"success": true}'
+        ]);
+
+        server.respondWith('POST', /api\/getdata?[\w]+/g, [
+          200,
+          responseHeaders.json,
+          '{"success": true}'
+        ]);
+      });
+
+      teardown(function() {
+        server.restore();
+      });
+
+      suite('attribute tests, invalid urls, method = [GET, POST]', function() {
+
+        test('method = GET, invalid urls, eventName === autostart', function() {
+          var invalidUrlValues = ["Undefined", "Null", "True", "False", "424242", "3.14159", "[]", "{}", ""];
+
+          var expectedValue = "";
+          var eventObj = {
+            eventName: "autostart",
+            data: {}
+          };
+
+          var datasource;
+          var selectorTemplate = "urlGet";
+          var selector;
+          invalidUrlValues.forEach(function(value, index) {
+            selector = selectorTemplate + value;
+            datasource = fixture(selector);
+            datasource.value = expectedValue;
+
+            datasource.actionListener(eventObj);
+            server.respond();
+            flush(function() {
+              assert.equal(datasource.$.activity.url, "", "activity url is not empty");
+              assert.equal(datasource.value, expectedValue);
+            });
+          });
+        });
+
+        test('method = GET, invalid urls, eventName !== autostart', function() {
+
+          var invalidUrlValues = ["Undefined", "Null", "True", "False", "424242", "3.14159", "[]", "{}", ""];
+
+          var expectedValue = "";
+          var eventObj = {
+            eventName: "event1",
+            data: {
+              "event1": "lorem ipsum"
+            }
+          };
+
+          var datasource;
+          var selectorTemplate = "urlGet";
+          var selector;
+          invalidUrlValues.forEach(function(value, index) {
+            selector = selectorTemplate + value;
+            datasource = fixture(selector);
+            datasource.value = expectedValue;
+
+            datasource.actionListener(eventObj);
+            server.respond();
+            flush(function() {
+              assert.equal(datasource.$.activity.url, "", "activity url is not empty");
+              assert.equal(datasource.value, expectedValue);
+            });
+          });
+
+        });
+
+        test('method = POST, invalid urls, eventName === autostart', function() {
+          var invalidUrlValues = ["Undefined", "Null", "True", "False", "424242", "3.14159", "[]", "{}", ""];
+
+          var expectedValue = "";
+          var eventObj = {
+            eventName: "autostart",
+            data: {}
+          };
+
+          var datasource;
+          var selectorTemplate = "urlPost";
+          var selector;
+          invalidUrlValues.forEach(function(value, index) {
+            selector = selectorTemplate + value;
+            datasource = fixture(selector);
+            datasource.value = expectedValue;
+
+            datasource.actionListener(eventObj);
+            server.respond();
+            flush(function() {
+              assert.equal(datasource.$.activity.url, "", "activity url is not empty");
+              assert.equal(datasource.value, expectedValue);
+            });
+          });
+        });
+
+        test('method = POST, invalid urls, eventName !== autostart', function() {
+
+          var invalidUrlValues = ["Undefined", "Null", "True", "False", "424242", "3.14159", "[]", "{}", ""];
+
+          var expectedValue = "";
+          var eventObj = {
+            eventName: "event1",
+            data: {
+              "event1": "lorem ipsum"
+            }
+          };
+
+          var datasource;
+          var selectorTemplate = "urlPost";
+          var selector;
+          invalidUrlValues.forEach(function(value, index) {
+            selector = selectorTemplate + value;
+            datasource = fixture(selector);
+            datasource.value = expectedValue;
+
+            datasource.actionListener(eventObj);
+            server.respond();
+            flush(function() {
+              assert.equal(datasource.$.activity.url, "", "activity url is not empty");
+              assert.equal(datasource.value, expectedValue);
+            });
+          });
+        });
+      });
+
+      suite('attribute tests, valid urls, method = [GET, POST]', function () {
+
+        test('method=GET, static url, eventName === autostart', function (done) {
+          var datasource = fixture('urlGetStatic')
+          var expectedValue = "";
+          var eventObj = {
+            eventName: "autostart",
+            data: {}
+          };
+
+          datasource.value = expectedValue;
+          datasource.actionListener(eventObj);
+          server.respond();
+          flush(function() {
+            assert.equal(datasource.$.activity.url, "api/getdata", "activity url is not set correctly");
+            assert.isObject(datasource.value, true, "datasource.value is not object");
+            assert.equal(datasource.value.success, true, "datasource.value is not true");
+            done();
+          });
+        });
+
+        test('method=GET, static url, eventName !== autostart', function (done) {
+          var datasource = fixture('urlGetStatic')
+          var expectedValue = "";
+          var eventObj = {
+            eventName: "input1",
+            data: {
+              "input1": "value1"
+            }
+          };
+
+          datasource.value = expectedValue;
+          datasource.actionListener(eventObj);
+          server.respond();
+          flush(function() {
+            assert.equal(datasource.$.activity.url, "", "activity url is not empty");
+            assert.equal(datasource.value, "", "datasource.value is not empty string");
+            done();
+          });
+        });
+
+        test('method=POST, static url, eventName === autostart', function (done) {
+          var datasource = fixture('urlPostStatic')
+          var expectedValue = "";
+          var eventObj = {
+            eventName: "autostart",
+            data: {}
+          };
+
+          datasource.value = expectedValue;
+          datasource.actionListener(eventObj);
+          server.respond();
+          flush(function() {
+            assert.equal(datasource.$.activity.url, "api/getdata", "activity url is not set correctly");
+            assert.isObject(datasource.value, true, "datasource.value is not object");
+            assert.equal(datasource.value.success, true, "datasource.value is not true");
+            done();
+          });
+        });
+
+        test('method=POST, static url, eventName !== autostart', function (done) {
+          var datasource = fixture('urlPostStatic')
+          var expectedValue = "";
+          var eventObj = {
+            eventName: "input1",
+            data: {
+              "input1": "value1"
+            }
+          };
+
+          datasource.value = expectedValue;
+          datasource.actionListener(eventObj);
+          server.respond();
+          flush(function() {
+            assert.equal(datasource.$.activity.url, "", "activity url is not empty");
+            assert.equal(datasource.value, "", "datasource.value is not empty string");
+            done();
+          });
+        });
+
+        test('method=GET, url api/getdata?input1={{input1}}, eventName === autostart', function (done) {
+          var datasource = fixture('urlGetInput1')
+          var expectedValue = "";
+          var eventObj = {
+            eventName: "autostart",
+            data: {}
+          };
+
+          datasource.value = expectedValue;
+          datasource.actionListener(eventObj);
+          server.respond();
+          flush(function() {
+            assert.equal(datasource.$.activity.url, "", "activity url is not empty");
+            assert.equal(datasource.value, "", "datasource.value is not empty string");
+            done();
+          });
+        });
+
+        test('method=GET, url api/getdata?input1={{input1}}, eventName === input1', function (done) {
+          var datasource = fixture('urlGetInput1')
+          var expectedValue = "";
+          var eventObj = {
+            eventName: "input1",
+            data: {
+              "input1": "value1"
+            }
+          };
+
+          datasource.value = expectedValue;
+          datasource.actionListener(eventObj);
+          server.respond();
+          flush(function() {
+            assert.equal(datasource.$.activity.url, "api/getdata?input1=value1", "activity url is constructed correctly");
+            assert.isObject(datasource.value, "datasource.value is not object");
+            assert.equal(datasource.value.success, true, "datasource.value.success is not true");
+            done();
+          });
+        });
+
+        test('method=POST, url api/getdata?input1={{input1}}, eventName === autostart', function (done) {
+          var datasource = fixture('urlPostInput1')
+          var expectedValue = "";
+          var eventObj = {
+            eventName: "autostart",
+            data: {}
+          };
+
+          datasource.value = expectedValue;
+          datasource.actionListener(eventObj);
+          server.respond();
+          flush(function() {
+            assert.equal(datasource.$.activity.url, "", "activity url is not empty");
+            assert.equal(datasource.value, "", "datasource.value is not empty string");
+            done();
+          });
+        });
+
+        test('method=POST, url api/getdata?input1={{input1}}, eventName === input1', function (done) {
+          var datasource = fixture('urlPostInput1')
+          var expectedValue = "";
+          var eventObj = {
+            eventName: "input1",
+            data: {
+              "input1": "value1"
+            }
+          };
+
+          datasource.value = expectedValue;
+          datasource.actionListener(eventObj);
+          server.respond();
+          flush(function() {
+            assert.equal(datasource.$.activity.url, "api/getdata?input1=value1", "activity url is constructed correctly");
+            assert.isObject(datasource.value, "datasource.value is not object");
+            assert.equal(datasource.value.success, true, "datasource.value.success is not true");
+            done();
+          });
+        });
+
+        test('method=GET, url api/getdata?input1={{input1}}&amp;input2={{input2}}, eventName === autostart', function (done) {
+          var datasource = fixture('urlGetInput1Input2')
+          var expectedValue = "";
+          var eventObj = {
+            eventName: "autostart",
+            data: {}
+          };
+
+          datasource.value = expectedValue;
+          datasource.actionListener(eventObj);
+          server.respond();
+          flush(function() {
+            assert.equal(datasource.$.activity.url, "", "activity url is not empty");
+            assert.equal(datasource.value, "", "datasource.value is not empty string");
+            done();
+          });
+        });
+
+        test('method=GET, url api/getdata?input1={{input1}}&amp;input2={{input2}}, eventName === input1', function (done) {
+          var datasource = fixture('urlGetInput1Input2')
+          var expectedValue = "";
+          var eventObj = {
+            eventName: "input1",
+            data: {
+              "input1": "value1"
+            }
+          };
+
+          datasource.value = expectedValue;
+          datasource.actionListener(eventObj);
+          server.respond();
+          flush(function() {
+            assert.equal(datasource.$.activity.url, "", "activity url is not empty");
+            assert.equal(datasource.value, "", "datasource.value is not empty string");
+            done();
+          });
+        });
+
+        test('method=GET, url api/getdata?input1={{input1}}&amp;input2={{input2}}, eventName === input2', function (done) {
+          var datasource = fixture('urlGetInput1Input2')
+          var expectedValue = "";
+          var eventObj = {
+            eventName: "input2",
+            data: {
+              "input2": "value2"
+            }
+          };
+
+          datasource.value = expectedValue;
+          datasource.actionListener(eventObj);
+          server.respond();
+          flush(function() {
+            assert.equal(datasource.$.activity.url, "", "activity url is not empty");
+            assert.equal(datasource.value, "", "datasource.value is not empty string");
+            done();
+          });
+        });
+
+        test('method=GET, url api/getdata?input1={{input1}}&amp;input2={{input2}}, eventName === input1,input2', function (done) {
+          var datasource = fixture('urlGetInput1Input2')
+          var expectedValue = "";
+          datasource.value = expectedValue;
+
+          var eventObj = {
+            eventName: "input1",
+            data: {
+              "input1": "value1"
+            }
+          };
+          datasource.actionListener(eventObj);
+          eventObj = {
+            eventName: "input2",
+            data: {
+              "input2": "value2"
+            }
+          };
+          datasource.actionListener(eventObj);
+          server.respond();
+          flush(function() {
+            assert.equal(datasource.$.activity.url, "api/getdata?input1=value1&input2=value2", "activity url not constructed correctly");
+            assert.isObject(datasource.value, "datasource.value is not object");
+            assert.equal(datasource.value.success, true, "datasource.value.success is not true");
+            done();
+          });
+        });
+
+        test('method=POST, url api/getdata?input1={{input1}}&amp;input2={{input2}}, eventName === autostart', function (done) {
+          var datasource = fixture('urlPostInput1Input2')
+          var expectedValue = "";
+          datasource.value = expectedValue;
+
+          var eventObj = {
+            eventName: "autostart",
+            data: {}
+          };
+          datasource.actionListener(eventObj);
+          server.respond();
+          flush(function() {
+            assert.equal(datasource.$.activity.url, "", "activity url is not empty");
+            assert.equal(datasource.value, "", "datasource.value is not empty string");
+            done();
+          });
+        });
+
+        test('method=POST, url api/getdata?input1={{input1}}&amp;input2={{input2}}, eventName === input1', function (done) {
+          var datasource = fixture('urlPostInput1Input2')
+          var expectedValue = "";
+          datasource.value = expectedValue;
+
+          var eventObj = {
+            eventName: "input1",
+            data: {
+              "input1": "value1"
+            }
+          };
+          datasource.actionListener(eventObj);
+          server.respond();
+          flush(function() {
+            assert.equal(datasource.$.activity.url, "", "activity url is not empty");
+            assert.equal(datasource.value, "", "datasource.value.success is not empty string");
+            done();
+          });
+        });
+
+        test('method=POST, url api/getdata?input1={{input1}}&amp;input2={{input2}}, eventName === input2', function (done) {
+          var datasource = fixture('urlPostInput1Input2')
+          var expectedValue = "";
+          datasource.value = expectedValue;
+
+          var eventObj = {
+            eventName: "input2",
+            data: {
+              "input2": "value2"
+            }
+          };
+          datasource.actionListener(eventObj);
+          server.respond();
+          flush(function() {
+            assert.equal(datasource.$.activity.url, "", "activity url is not empty");
+            assert.equal(datasource.value, "", "datasource.value.success is not empty string");
+            done();
+          });
+        });
+
+        test('method=POST, url api/getdata?input1={{input1}}&amp;input2={{input2}}, eventName === input1,input2', function (done) {
+          var datasource = fixture('urlPostInput1Input2')
+          var expectedValue = "";
+          datasource.value = expectedValue;
+
+          var eventObj = {
+            eventName: "input1",
+            data: {
+              "input1": "value1"
+            }
+          };
+          datasource.actionListener(eventObj);
+          eventObj = {
+            eventName: "input2",
+            data: {
+              "input2": "value2"
+            }
+          };
+          datasource.actionListener(eventObj);
+          server.respond();
+          flush(function() {
+            assert.equal(datasource.$.activity.url, "api/getdata?input1=value1&input2=value2", "activity url not constructed correctly");
+            assert.isObject(datasource.value, "datasource.value is not object");
+            assert.equal(datasource.value.success, true, "datasource.value.success is not true");
+            done();
+          });
+        });
+      });
+    });
+  </script>
+
+</body>
+
+</html>
