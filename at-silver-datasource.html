@@ -25,14 +25,16 @@
           value: ""
         },
         value: {
-          type: Object
+          type: Object,
+          readOnly: true,
+          notify: true
         }
       },
       $meta: [{
         title: "Dashboard datasource",
         type: "element",
         xtype: "at-silver-datasource",
-        events: [ "value-changed" ]
+        events: ["value-changed"]
       }],
       ready: function () {
 
@@ -40,21 +42,23 @@
       _parameterChanged: function (newValue, oldValue) {
         this._action();
       },
-      _action: function(url) {
-        
-        if(url) {
+      _action: function (url) {
+
+        if (url) {
           this.$.activity.url = url;
           this.$.activity.generateRequest();
         }
-      
+
       },
       actionListener: function (event) {
         function isString(obj) {
           return Object.prototype.toString.call(obj) === "[object String]";
         }
+
         function isNonEmptyString(obj) {
           return isString(obj) && obj !== "";
         }
+
         function isObject(obj) {
           return Object.prototype.toString.call(obj) === "[object Object]";
         }
@@ -82,7 +86,7 @@
         if (!matchedParts) {
           // so if no matches are found match function returns
           // this will also catch invalid static urls like "undefined", "null", "[]", "{}", etc ...
-          return ;
+          return;
         }
 
         var cachedEvents = this._cachedEvents;
@@ -112,7 +116,9 @@
       _activity_onResponse: function (event) {
         console.log('acitivty on response');
         this.value = event.detail;
-        this.fire('value-changed', { value: this.value });
+        this.fire('value-changed', {
+          value: this.value
+        });
       },
       _activity_onError: function (event) {
         console.log('acitivty on error');
