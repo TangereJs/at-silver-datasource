@@ -23,109 +23,109 @@
   <!-- tests where urls are invalid values  -->
   <test-fixture id="urlGetUndefined">
     <template>
-      <at-silver-datasource method="GET" url="undefined"></at-silver-datasource>
+      <at-silver-datasource method="GET" parameter="undefined"></at-silver-datasource>
     </template>
   </test-fixture>
 
   <test-fixture id="urlGetNull">
     <template>
-      <at-silver-datasource method="GET" url="null"></at-silver-datasource>
+      <at-silver-datasource method="GET" parameter="null"></at-silver-datasource>
     </template>
   </test-fixture>
 
   <test-fixture id="urlGetTrue">
     <template>
-      <at-silver-datasource method="GET" url="true"></at-silver-datasource>
+      <at-silver-datasource method="GET" parameter="true"></at-silver-datasource>
     </template>
   </test-fixture>
 
   <test-fixture id="urlGetFalse">
     <template>
-      <at-silver-datasource method="GET" url="false"></at-silver-datasource>
+      <at-silver-datasource method="GET" parameter="false"></at-silver-datasource>
     </template>
   </test-fixture>
 
   <test-fixture id="urlGet424242">
     <template>
-      <at-silver-datasource method="GET" url="424242"></at-silver-datasource>
+      <at-silver-datasource method="GET" parameter="424242"></at-silver-datasource>
     </template>
   </test-fixture>
 
   <test-fixture id="urlGet3.14159">
     <template>
-      <at-silver-datasource method="GET" url="url3.14159"></at-silver-datasource>
+      <at-silver-datasource method="GET" parameter="url3.14159"></at-silver-datasource>
     </template>
   </test-fixture>
 
   <test-fixture id="urlGet[]">
     <template>
-      <at-silver-datasource method="GET" url="[]"></at-silver-datasource>
+      <at-silver-datasource method="GET" parameter="[]"></at-silver-datasource>
     </template>
   </test-fixture>
 
   <test-fixture id="urlGet{}">
     <template>
-      <at-silver-datasource method="GET" url="{}"></at-silver-datasource>
+      <at-silver-datasource method="GET" parameter="{}"></at-silver-datasource>
     </template>
   </test-fixture>
 
   <test-fixture id="urlGet">
     <template>
-      <at-silver-datasource method="GET" url=""></at-silver-datasource>
+      <at-silver-datasource method="GET" parameter=""></at-silver-datasource>
     </template>
   </test-fixture>
 
   <test-fixture id="urlPostUndefined">
     <template>
-      <at-silver-datasource method="POST" url="undefined"></at-silver-datasource>
+      <at-silver-datasource method="POST" parameter="undefined"></at-silver-datasource>
     </template>
   </test-fixture>
 
   <test-fixture id="urlPostNull">
     <template>
-      <at-silver-datasource method="POST" url="null"></at-silver-datasource>
+      <at-silver-datasource method="POST" parameter="null"></at-silver-datasource>
     </template>
   </test-fixture>
 
   <test-fixture id="urlPostTrue">
     <template>
-      <at-silver-datasource method="POST" url="true"></at-silver-datasource>
+      <at-silver-datasource method="POST" parameter="true"></at-silver-datasource>
     </template>
   </test-fixture>
 
   <test-fixture id="urlPostFalse">
     <template>
-      <at-silver-datasource method="POST" url="false"></at-silver-datasource>
+      <at-silver-datasource method="POST" parameter="false"></at-silver-datasource>
     </template>
   </test-fixture>
 
   <test-fixture id="urlPost424242">
     <template>
-      <at-silver-datasource method="POST" url="424242"></at-silver-datasource>
+      <at-silver-datasource method="POST" parameter="424242"></at-silver-datasource>
     </template>
   </test-fixture>
 
   <test-fixture id="urlPost3.14159">
     <template>
-      <at-silver-datasource method="POST" url="url3.14159"></at-silver-datasource>
+      <at-silver-datasource method="POST" parameter="url3.14159"></at-silver-datasource>
     </template>
   </test-fixture>
 
   <test-fixture id="urlPost[]">
     <template>
-      <at-silver-datasource method="POST" url="[]"></at-silver-datasource>
+      <at-silver-datasource method="POST" parameter="[]"></at-silver-datasource>
     </template>
   </test-fixture>
 
   <test-fixture id="urlPost{}">
     <template>
-      <at-silver-datasource method="POST" url="{}"></at-silver-datasource>
+      <at-silver-datasource method="POST" parameter="{}"></at-silver-datasource>
     </template>
   </test-fixture>
 
   <test-fixture id="urlPost">
     <template>
-      <at-silver-datasource method="POST" url=""></at-silver-datasource>
+      <at-silver-datasource method="POST" parameter=""></at-silver-datasource>
     </template>
   </test-fixture>
 
@@ -133,37 +133,37 @@
 
   <test-fixture id="urlGetStatic">
     <template>
-      <at-silver-datasource method="GET" url="api/getdata"></at-silver-datasource>
+      <at-silver-datasource method="GET" parameter="api/getdata"></at-silver-datasource>
     </template>
   </test-fixture>
 
   <test-fixture id="urlPostStatic">
     <template>
-      <at-silver-datasource method="POST" url="api/getdata"></at-silver-datasource>
+      <at-silver-datasource method="POST" parameter="api/getdata"></at-silver-datasource>
     </template>
   </test-fixture>
 
   <test-fixture id="urlGetInput1">
     <template>
-      <at-silver-datasource method="GET" url="api/getdata?input1={{input1}}"></at-silver-datasource>
+      <at-silver-datasource method="GET" parameter="api/getdata?input1={{input1}}"></at-silver-datasource>
     </template>
   </test-fixture>
 
   <test-fixture id="urlPostInput1">
     <template>
-      <at-silver-datasource method="POST" url="api/getdata?input1={{input1}}"></at-silver-datasource>
+      <at-silver-datasource method="POST" parameter="api/getdata?input1={{input1}}"></at-silver-datasource>
     </template>
   </test-fixture>
 
   <test-fixture id="urlGetInput1Input2">
     <template>
-      <at-silver-datasource method="GET" url="api/getdata?input1={{input1}}&amp;input2={{input2}}"></at-silver-datasource>
+      <at-silver-datasource method="GET" parameter="api/getdata?input1={{input1}}&amp;input2={{input2}}"></at-silver-datasource>
     </template>
   </test-fixture>
 
   <test-fixture id="urlPostInput1Input2">
     <template>
-      <at-silver-datasource method="POST" url="api/getdata?input1={{input1}}&amp;input2={{input2}}"></at-silver-datasource>
+      <at-silver-datasource method="POST" parameter="api/getdata?input1={{input1}}&amp;input2={{input2}}"></at-silver-datasource>
     </template>
   </test-fixture>
 

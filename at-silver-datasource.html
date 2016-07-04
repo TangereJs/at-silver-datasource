@@ -15,18 +15,17 @@
     Polymer({
       is: 'at-silver-datasource',
       properties: {
-        url: {
+        parameter: {
           type: String,
           value: "",
-          observer: "_urlChanged"
+          observer: "_parameterChanged"
         },
         method: {
           type: String,
           value: ""
         },
         value: {
-          type: String,
-          value: ""
+          type: Object
         }
       },
       $meta: [{
@@ -38,8 +37,16 @@
       ready: function () {
 
       },
-      _urlChanged: function (newValue, oldValue) {
-
+      _parameterChanged: function (newValue, oldValue) {
+        this._action();
+      },
+      _action: function(url) {
+        
+        if(url) {
+          this.$.activity.url = url;
+          this.$.activity.generateRequest();
+        }
+      
       },
       actionListener: function (event) {
         function isString(obj) {
@@ -52,7 +59,7 @@
           return Object.prototype.toString.call(obj) === "[object Object]";
         }
 
-        var url = this.url;
+        var url = this.parameter;
         if (!isNonEmptyString(url)) {
           return;
         }
@@ -96,8 +103,7 @@
 
         if (!curlyBraceRegex.test(url)) {
           // all fields are replaced
-          this.$.activity.url = url;
-          this.$.activity.generateRequest();
+          this._action(url);
         }
       },
       _activity_onRequest: function (event) {

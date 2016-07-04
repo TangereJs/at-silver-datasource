@@ -72,7 +72,7 @@
           var invalidUrlValues = [undefined, null, true, false, 424242, 3.14159, [], {}, ""];
 
           invalidUrlValues.forEach(function(value, index) {
-            datasource.url = value;
+            datasource.parameter = value;
             datasource.actionListener(eventObj);
             server.respond();
             flush(function () {
@@ -97,7 +97,7 @@
           var invalidUrlValues = [undefined, null, true, false, 424242, 3.14159, [], {}, ""];
 
           invalidUrlValues.forEach(function(value, index) {
-            datasource.url = value;
+            datasource.parameter = value;
             datasource.actionListener(eventObj);
             server.respond();
             flush(function () {
@@ -121,7 +121,7 @@
           var invalidUrlValues = [undefined, null, true, false, 424242, 3.14159, [], {}, ""];
 
           invalidUrlValues.forEach(function(value, index) {
-            datasource.url = value;
+            datasource.parameter = value;
             datasource.actionListener(eventObj);
             server.respond();
             flush(function () {
@@ -146,7 +146,7 @@
           var invalidUrlValues = [undefined, null, true, false, 424242, 3.14159, [], {}, ""];
 
           invalidUrlValues.forEach(function(value, index) {
-            datasource.url = value;
+            datasource.parameter = value;
             datasource.actionListener(eventObj);
             server.respond();
             flush(function () {
@@ -169,7 +169,7 @@
 
           datasource.value = expectedValue;
           datasource.method = 'GET';
-          datasource.url = 'api/getdata';
+          datasource.parameter = 'api/getdata';
 
           datasource.actionListener(eventObj);
           server.respond();
@@ -193,7 +193,7 @@
 
           datasource.value = expectedValue;
           datasource.method = 'GET';
-          datasource.url = 'api/getdata';
+          datasource.parameter = 'api/getdata';
 
           datasource.actionListener(eventObj);
           server.respond();
@@ -214,7 +214,7 @@
 
           datasource.value = expectedValue;
           datasource.method = 'POST';
-          datasource.url = 'api/getdata';
+          datasource.parameter = 'api/getdata';
 
           datasource.actionListener(eventObj);
           server.respond();
@@ -238,7 +238,7 @@
 
           datasource.value = expectedValue;
           datasource.method = 'POST';
-          datasource.url = 'api/getdata';
+          datasource.parameter = 'api/getdata';
 
           datasource.actionListener(eventObj);
           server.respond();
@@ -259,7 +259,7 @@
 
           datasource.value = expectedValue;
           datasource.method = 'GET';
-          datasource.url = 'api/getdata?input1={{input1}}';
+          datasource.parameter = 'api/getdata?input1={{input1}}';
 
           datasource.actionListener(eventObj);
           server.respond();
@@ -282,7 +282,7 @@
 
           datasource.value = expectedValue;
           datasource.method = 'GET';
-          datasource.url = 'api/getdata?input1={{input1}}';
+          datasource.parameter = 'api/getdata?input1={{input1}}';
 
           datasource.actionListener(eventObj);
           server.respond();
@@ -304,7 +304,7 @@
 
           datasource.value = expectedValue;
           datasource.method = 'POST';
-          datasource.url = 'api/getdata?input1={{input1}}';
+          datasource.parameter = 'api/getdata?input1={{input1}}';
 
           datasource.actionListener(eventObj);
           server.respond();
@@ -327,7 +327,7 @@
 
           datasource.value = expectedValue;
           datasource.method = 'POST';
-          datasource.url = 'api/getdata?input1={{input1}}';
+          datasource.parameter = 'api/getdata?input1={{input1}}';
 
           datasource.actionListener(eventObj);
           server.respond();
@@ -349,7 +349,7 @@
 
           datasource.value = expectedValue;
           datasource.method = 'GET';
-          datasource.url = 'api/getdata?input1={{input1}}&input2={{input2}}';
+          datasource.parameter = 'api/getdata?input1={{input1}}&input2={{input2}}';
 
           datasource.actionListener(eventObj);
           server.respond();
@@ -372,7 +372,7 @@
 
           datasource.value = expectedValue;
           datasource.method = 'GET';
-          datasource.url = 'api/getdata?input1={{input1}}&input2={{input2}}';
+          datasource.parameter = 'api/getdata?input1={{input1}}&input2={{input2}}';
 
           datasource.actionListener(eventObj);
           server.respond();
@@ -395,7 +395,7 @@
 
           datasource.value = expectedValue;
           datasource.method = 'GET';
-          datasource.url = 'api/getdata?input1={{input1}}&input2={{input2}}';
+          datasource.parameter = 'api/getdata?input1={{input1}}&input2={{input2}}';
 
           datasource.actionListener(eventObj);
           server.respond();
@@ -418,7 +418,7 @@
 
           datasource.value = expectedValue;
           datasource.method = 'GET';
-          datasource.url = 'api/getdata?input1={{input1}}&input2={{input2}}';
+          datasource.parameter = 'api/getdata?input1={{input1}}&input2={{input2}}';
 
           datasource.actionListener(eventObj);
           eventObj.eventName = "input2";
@@ -445,7 +445,7 @@
 
           datasource.value = expectedValue;
           datasource.method = 'POST';
-          datasource.url = 'api/getdata?input1={{input1}}&input2={{input2}}';
+          datasource.parameter = 'api/getdata?input1={{input1}}&input2={{input2}}';
 
           datasource.actionListener(eventObj);
           server.respond();
@@ -466,7 +466,7 @@
 
           datasource.value = expectedValue;
           datasource.method = 'POST';
-          datasource.url = 'api/getdata?input1={{input1}}&input2={{input2}}';
+          datasource.parameter = 'api/getdata?input1={{input1}}&input2={{input2}}';
 
           datasource.actionListener(eventObj);
           server.respond();
@@ -489,7 +489,7 @@
 
           datasource.value = expectedValue;
           datasource.method = 'POST';
-          datasource.url = 'api/getdata?input1={{input1}}&input2={{input2}}';
+          datasource.parameter = 'api/getdata?input1={{input1}}&input2={{input2}}';
 
           datasource.actionListener(eventObj);
           server.respond();
@@ -512,7 +512,7 @@
 
           datasource.value = expectedValue;
           datasource.method = 'POST';
-          datasource.url = 'api/getdata?input1={{input1}}&input2={{input2}}';
+          datasource.parameter = 'api/getdata?input1={{input1}}&input2={{input2}}';
 
           datasource.actionListener(eventObj);
           eventObj.eventName = "input2";
