@@ -62,8 +62,15 @@
           var datasource = fixture('propertyTest');
           var expectedValue = "";
           var eventObj = {
-            eventName: "autostart",
-            data: {}
+            type: "autostart",
+            parameter: "",
+            detail: {
+              model:{
+                state: {
+
+                }
+              }
+            }
           };
 
           datasource.value = expectedValue;
@@ -85,9 +92,14 @@
           var datasource = fixture('propertyTest');
           var expectedValue = "";
           var eventObj = {
-            eventName: "input1",
-            data: {
-              "input1": "value1"
+            type: "input1-changed",
+            parameter: "value1",
+            detail: {
+              model:{
+                state: {
+                  "input1": "value1"
+                }
+              }
             }
           };
 
@@ -111,8 +123,15 @@
           var datasource = fixture('propertyTest');
           var expectedValue = "";
           var eventObj = {
-            eventName: "autostart",
-            data: {}
+            type: "autostart",
+            parameter: "",
+            detail: {
+              model:{
+                state: {
+
+                }
+              }
+            }
           };
 
           datasource.value = expectedValue;
@@ -134,9 +153,14 @@
           var datasource = fixture('propertyTest');
           var expectedValue = "";
           var eventObj = {
-            eventName: "input1",
-            data: {
-              "input1": "value1"
+            type: "input1-changed",
+            parameter: "value1",
+            detail: {
+              model:{
+                state: {
+                  "input1": "value1"
+                }
+              }
             }
           };
 
@@ -163,8 +187,15 @@
           var datasource = fixture('propertyTest');
           var expectedValue = "";
           var eventObj = {
-            eventName: "autostart",
-            data: {}
+            type: "autostart",
+            parameter: "",
+            detail: {
+              model:{
+                state: {
+
+                }
+              }
+            }
           };
 
           datasource.value = expectedValue;
@@ -185,9 +216,14 @@
           var datasource = fixture('propertyTest');
           var expectedValue = "";
           var eventObj = {
-            eventName: "input1",
-            data: {
-              "input1": "value1"
+            type: "input1-changed",
+            parameter: "value1",
+            detail: {
+              model:{
+                state: {
+                  "input1": "value1"
+                }
+              }
             }
           };
 
@@ -208,8 +244,15 @@
           var datasource = fixture('propertyTest');
           var expectedValue = "";
           var eventObj = {
-            eventName: "autostart",
-            data: {}
+            type: "autostart",
+            parameter: "",
+            detail: {
+              model:{
+                state: {
+
+                }
+              }
+            }
           };
 
           datasource.value = expectedValue;
@@ -230,9 +273,14 @@
           var datasource = fixture('propertyTest');
           var expectedValue = "";
           var eventObj = {
-            eventName: "input1",
-            data: {
-              "input1": "value1"
+            type: "input1-changed",
+            parameter: "value1",
+            detail: {
+              model:{
+                state: {
+                  "input1": "value1"
+                }
+              }
             }
           };
 
@@ -253,8 +301,15 @@
           var datasource = fixture('propertyTest');
           var expectedValue = "";
           var eventObj = {
-            eventName: "autostart",
-            data: {}
+            type: "autostart",
+            parameter: "",
+            detail: {
+              model:{
+                state: {
+
+                }
+              }
+            }
           };
 
           datasource.value = expectedValue;
@@ -274,9 +329,14 @@
           var datasource = fixture('propertyTest');
           var expectedValue = "";
           var eventObj = {
-            eventName: "input1",
-            data: {
-              "input1": "value1"
+            type: "input1-changed",
+            parameter: "value1",
+            detail: {
+              model:{
+                state: {
+                  "input1": "value1"
+                }
+              }
             }
           };
 
@@ -298,8 +358,15 @@
           var datasource = fixture('propertyTest');
           var expectedValue = "";
           var eventObj = {
-            eventName: "autostart",
-            data: {}
+            type: "autostart",
+            parameter: "",
+            detail: {
+              model:{
+                state: {
+
+                }
+              }
+            }
           };
 
           datasource.value = expectedValue;
@@ -319,9 +386,14 @@
           var datasource = fixture('propertyTest');
           var expectedValue = "";
           var eventObj = {
-            eventName: "input1",
-            data: {
-              "input1": "value1"
+            type: "input1-changed",
+            parameter: "value1",
+            detail: {
+              model:{
+                state: {
+                  "input1": "value1"
+                }
+              }
             }
           };
 
@@ -343,8 +415,15 @@
           var datasource = fixture('propertyTest');
           var expectedValue = "";
           var eventObj = {
-            eventName: "autostart",
-            data: {}
+            type: "autostart",
+            parameter: "",
+            detail: {
+              model:{
+                state: {
+
+                }
+              }
+            }
           };
 
           datasource.value = expectedValue;
@@ -364,9 +443,14 @@
           var datasource = fixture('propertyTest');
           var expectedValue = "";
           var eventObj = {
-            eventName: "input1",
-            data: {
-              "input1": "value1"
+            type: "input1-changed",
+            parameter: "value1",
+            detail: {
+              model:{
+                state: {
+                  "input1": "value1"
+                }
+              }
             }
           };
 
@@ -387,9 +471,14 @@
           var datasource = fixture('propertyTest');
           var expectedValue = "";
           var eventObj = {
-            eventName: "input2",
-            data: {
-              "input2": "value2"
+            type: "input2-changed",
+            parameter: "value2",
+            detail: {
+              model:{
+                state: {
+                  "input2": "value2"
+                }
+              }
             }
           };
 
@@ -410,9 +499,15 @@
           var datasource = fixture('propertyTest');
           var expectedValue = "";
           var eventObj = {
-            eventName: "input1",
-            data: {
-              "input1": "value1"
+            type: "input1-changed",
+            parameter: "value1",
+            detail: {
+              model:{
+                state: {
+                  "input1": "value1",
+                  "input2": "value2"
+                }
+              }
             }
           };
 
@@ -420,9 +515,6 @@
           datasource.method = 'GET';
           datasource.parameter = 'api/getdata?input1={{input1}}&input2={{input2}}';
 
-          datasource.actionListener(eventObj);
-          eventObj.eventName = "input2";
-          eventObj.data["input2"] = "value2"
           datasource.actionListener(eventObj);
 
           server.respond();
@@ -439,8 +531,15 @@
           var datasource = fixture('propertyTest');
           var expectedValue = "";
           var eventObj = {
-            eventName: "autostart",
-            data: {}
+            type: "autostart",
+            parameter: "",
+            detail: {
+              model:{
+                state: {
+
+                }
+              }
+            }
           };
 
           datasource.value = expectedValue;
@@ -460,8 +559,15 @@
           var datasource = fixture('propertyTest');
           var expectedValue = "";
           var eventObj = {
-            eventName: "autostart",
-            data: {}
+            type: "input1-changed",
+            parameter: "value1",
+            detail: {
+              model:{
+                state: {
+                  "input1": "value1"
+                }
+              }
+            }
           };
 
           datasource.value = expectedValue;
@@ -481,9 +587,14 @@
           var datasource = fixture('propertyTest');
           var expectedValue = "";
           var eventObj = {
-            eventName: "input2",
-            data: {
-              "input2": "value2"
+            type: "input2-changed",
+            parameter: "value2",
+            detail: {
+              model:{
+                state: {
+                  "input2": "value2"
+                }
+              }
             }
           };
 
@@ -504,9 +615,15 @@
           var datasource = fixture('propertyTest');
           var expectedValue = "";
           var eventObj = {
-            eventName: "input1",
-            data: {
-              "input1": "value1"
+            type: "input1-changed",
+            parameter: "value1",
+            detail: {
+              model:{
+                state: {
+                  "input1": "value1",
+                  "input2": "value2",
+                }
+              }
             }
           };
 
@@ -514,9 +631,6 @@
           datasource.method = 'POST';
           datasource.parameter = 'api/getdata?input1={{input1}}&input2={{input2}}';
 
-          datasource.actionListener(eventObj);
-          eventObj.eventName = "input2";
-          eventObj.data["input2"] = "value2"
           datasource.actionListener(eventObj);
 
           server.respond();

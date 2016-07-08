@@ -203,8 +203,15 @@
 
           var expectedValue = "";
           var eventObj = {
-            eventName: "autostart",
-            data: {}
+            type: "autostart",
+            parameter: "",
+            detail: {
+              model:{
+                state: {
+
+                }
+              }
+            }
           };
 
           var datasource;
@@ -230,9 +237,14 @@
 
           var expectedValue = "";
           var eventObj = {
-            eventName: "event1",
-            data: {
-              "event1": "lorem ipsum"
+            type: "event1-changed",
+            parameter: "lorem ispum",
+            detail: {
+              model:{
+                state: {
+                  "event1": "lorem ipsum"
+                }
+              }
             }
           };
 
@@ -259,8 +271,15 @@
 
           var expectedValue = "";
           var eventObj = {
-            eventName: "autostart",
-            data: {}
+            type: "autostart",
+            parameter: "",
+            detail: {
+              model:{
+                state: {
+
+                }
+              }
+            }
           };
 
           var datasource;
@@ -286,9 +305,14 @@
 
           var expectedValue = "";
           var eventObj = {
-            eventName: "event1",
-            data: {
-              "event1": "lorem ipsum"
+            type: "event1-changed",
+            parameter: "lorem ispum",
+            detail: {
+              model:{
+                state: {
+                  "event1": "lorem ipsum"
+                }
+              }
             }
           };
 
@@ -316,8 +340,15 @@
           var datasource = fixture('urlGetStatic')
           var expectedValue = "";
           var eventObj = {
-            eventName: "autostart",
-            data: {}
+            type: "autostart",
+            parameter: "",
+            detail: {
+              model:{
+                state: {
+
+                }
+              }
+            }
           };
 
           datasource.value = expectedValue;
@@ -335,9 +366,14 @@
           var datasource = fixture('urlGetStatic')
           var expectedValue = "";
           var eventObj = {
-            eventName: "input1",
-            data: {
-              "input1": "value1"
+            type: "input1-changed",
+            parameter: "value1",
+            detail: {
+              model:{
+                state: {
+                  "input1": "value1"
+                }
+              }
             }
           };
 
@@ -355,8 +391,15 @@
           var datasource = fixture('urlPostStatic')
           var expectedValue = "";
           var eventObj = {
-            eventName: "autostart",
-            data: {}
+            type: "autostart",
+            parameter: "",
+            detail: {
+              model:{
+                state: {
+
+                }
+              }
+            }
           };
 
           datasource.value = expectedValue;
@@ -374,9 +417,14 @@
           var datasource = fixture('urlPostStatic')
           var expectedValue = "";
           var eventObj = {
-            eventName: "input1",
-            data: {
-              "input1": "value1"
+            type: "input1-changed",
+            parameter: "value1",
+            detail: {
+              model:{
+                state: {
+                  "input1": "value1"
+                }
+              }
             }
           };
 
@@ -394,8 +442,15 @@
           var datasource = fixture('urlGetInput1')
           var expectedValue = "";
           var eventObj = {
-            eventName: "autostart",
-            data: {}
+            type: "autostart",
+            parameter: "",
+            detail: {
+              model:{
+                state: {
+
+                }
+              }
+            }
           };
 
           datasource.value = expectedValue;
@@ -412,9 +467,14 @@
           var datasource = fixture('urlGetInput1')
           var expectedValue = "";
           var eventObj = {
-            eventName: "input1",
-            data: {
-              "input1": "value1"
+            type: "input1-changed",
+            parameter: "value1",
+            detail: {
+              model:{
+                state: {
+                  "input1": "value1"
+                }
+              }
             }
           };
 
@@ -433,8 +493,15 @@
           var datasource = fixture('urlPostInput1')
           var expectedValue = "";
           var eventObj = {
-            eventName: "autostart",
-            data: {}
+            type: "autostart",
+            parameter: "",
+            detail: {
+              model:{
+                state: {
+
+                }
+              }
+            }
           };
 
           datasource.value = expectedValue;
@@ -451,9 +518,14 @@
           var datasource = fixture('urlPostInput1')
           var expectedValue = "";
           var eventObj = {
-            eventName: "input1",
-            data: {
-              "input1": "value1"
+            type: "input1-changed",
+            parameter: "value1",
+            detail: {
+              model:{
+                state: {
+                  "input1": "value1"
+                }
+              }
             }
           };
 
@@ -472,8 +544,15 @@
           var datasource = fixture('urlGetInput1Input2')
           var expectedValue = "";
           var eventObj = {
-            eventName: "autostart",
-            data: {}
+            type: "autostart",
+            parameter: "",
+            detail: {
+              model:{
+                state: {
+
+                }
+              }
+            }
           };
 
           datasource.value = expectedValue;
@@ -490,9 +569,14 @@
           var datasource = fixture('urlGetInput1Input2')
           var expectedValue = "";
           var eventObj = {
-            eventName: "input1",
-            data: {
-              "input1": "value1"
+            type: "input1-changed",
+            parameter: "value1",
+            detail: {
+              model:{
+                state: {
+                  "input1": "value1"
+                }
+              }
             }
           };
 
@@ -510,9 +594,14 @@
           var datasource = fixture('urlGetInput1Input2')
           var expectedValue = "";
           var eventObj = {
-            eventName: "input2",
-            data: {
-              "input2": "value2"
+            type: "input2-changed",
+            parameter: "value2",
+            detail: {
+              model:{
+                state: {
+                  "input2": "value2"
+                }
+              }
             }
           };
 
@@ -532,16 +621,27 @@
           datasource.value = expectedValue;
 
           var eventObj = {
-            eventName: "input1",
-            data: {
-              "input1": "value1"
+            type: "input1-changed",
+            parameter: "value1",
+            detail: {
+              model:{
+                state: {
+                  "input1": "value1"
+                }
+              }
             }
           };
           datasource.actionListener(eventObj);
           eventObj = {
-            eventName: "input2",
-            data: {
-              "input2": "value2"
+            type: "input2-changed",
+            parameter: "value2",
+            detail: {
+              model:{
+                state: {
+                  "input1": "value1",
+                  "input2": "value2"
+                }
+              }
             }
           };
           datasource.actionListener(eventObj);
@@ -560,8 +660,15 @@
           datasource.value = expectedValue;
 
           var eventObj = {
-            eventName: "autostart",
-            data: {}
+            type: "autostart",
+            parameter: "",
+            detail: {
+              model:{
+                state: {
+
+                }
+              }
+            }
           };
           datasource.actionListener(eventObj);
           server.respond();
@@ -578,9 +685,14 @@
           datasource.value = expectedValue;
 
           var eventObj = {
-            eventName: "input1",
-            data: {
-              "input1": "value1"
+            type: "input1-changed",
+            parameter: "value1",
+            detail: {
+              model:{
+                state: {
+                  "input1": "value1"
+                }
+              }
             }
           };
           datasource.actionListener(eventObj);
@@ -598,9 +710,14 @@
           datasource.value = expectedValue;
 
           var eventObj = {
-            eventName: "input2",
-            data: {
-              "input2": "value2"
+            type: "input2-changed",
+            parameter: "value2",
+            detail: {
+              model:{
+                state: {
+                  "input2": "value2"
+                }
+              }
             }
           };
           datasource.actionListener(eventObj);
@@ -618,16 +735,27 @@
           datasource.value = expectedValue;
 
           var eventObj = {
-            eventName: "input1",
-            data: {
-              "input1": "value1"
+            type: "input1-changed",
+            parameter: "value1",
+            detail: {
+              model:{
+                state: {
+                  "input1": "value1"
+                }
+              }
             }
           };
           datasource.actionListener(eventObj);
           eventObj = {
-            eventName: "input2",
-            data: {
-              "input2": "value2"
+            type: "input2-changed",
+            parameter: "value2",
+            detail: {
+              model:{
+                state: {
+                  "input1": "value1",
+                  "input2": "value2"
+                }
+              }
             }
           };
           datasource.actionListener(eventObj);

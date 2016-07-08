@@ -49,15 +49,19 @@
 
       },
       actionListener: function (event) {
-        
+        function isString(obj) {
+          return Object.prototype.toString.call(obj) === "[object String]";
+        }
+
         var url = this.parameter;
-        if (!url) {
+        if (!isString(url)) {
+          // if url is not string return; NOTE that programmatically this.parameter can be set to {}, [], true, false, 3.14159, 424242 or any other random non string value
           return;
         }
 
         var curlyBraceRegex = /\{\{|\}\}/gm;
-        
-        if (!curlyBraceRegex.test(url) && event.eventName === "autostart") {
+
+        if (!curlyBraceRegex.test(url) && event.type === "autostart") {
           // we have a static url and autostart
           this._action(url);
           return;
