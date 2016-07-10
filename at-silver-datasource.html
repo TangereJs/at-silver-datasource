@@ -94,7 +94,11 @@
       },
       _activity_onResponse: function (event) {
         //console.log('acitivty on response');
-        this.value = event.detail;
+        var response = event.detail;
+
+        // only user inner Data if response is provided from a MPS API
+        this.value = !!response.Data ? response.Data : response;
+
         this.fire('value-changed', {
           value: this.value
         });
