@@ -2,8 +2,9 @@
   "name": "at-silver-datasource",
   "private": true,
   "dependencies": {
-    "polymer": "Polymer/polymer#master",
-    "at-core-activity": "TangereJs/at-core-activity#0.8-preview"
+    "tangere": "TangereJs/tangere#0.8-preview",
+    "at-core-activity": "TangereJs/at-core-activity#0.8-preview",
+    "at-doc-viewer": "TangereJs/at-doc-viewer#0.8-preview"
   },
   "version": "0.0.0.24"
 }
