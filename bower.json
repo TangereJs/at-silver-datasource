@@ -2,9 +2,9 @@
   "name": "at-silver-datasource",
   "private": true,
   "dependencies": {
-    "tangere": "TangereJs/tangere#0.8-preview",
-    "at-core-activity": "TangereJs/at-core-activity#0.8-preview",
-    "at-doc-viewer": "TangereJs/at-doc-viewer#0.8-preview"
+    "tangere": "TangereJs/tangere#master",
+    "at-core-activity": "TangereJs/at-core-activity#master",
+    "at-doc-viewer": "TangereJs/at-doc-viewer#master"
   },
   "version": "0.0.0.24"
 }
